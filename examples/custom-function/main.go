@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/yidane/formula"
-	"github.com/yidane/formula/opt"
+	"github.com/ghjan/formula"
+	"github.com/ghjan/formula/opt"
 	"log"
 )
 
@@ -15,7 +15,8 @@ func init() {
 }
 
 func main() {
-	expression := formula.NewExpression("CustomFunction(1,2)")
+	expressionFormula := "CustomFunction(1,2)"
+	expression := formula.NewExpression(expressionFormula)
 	result, err := expression.Evaluate()
 	if err != nil {
 		log.Fatal(err)
@@ -30,5 +31,5 @@ func main() {
 		log.Fatal("error")
 	}
 
-	log.Println("custom function succeed")
+	log.Printf("custom function succeed,expressionFormula:%s, result:=%s\n", expressionFormula, result)
 }

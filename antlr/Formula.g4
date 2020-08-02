@@ -4,8 +4,8 @@ options{language=go;}
 
 @header {
 import (
-    "github.com/yidane/formula/opt"
-    "github.com/yidane/formula/internal/exp"
+    "github.com/ghjan/formula/opt"
+    "github.com/ghjan/formula/internal/exp"
 )
 }
 

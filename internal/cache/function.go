@@ -2,7 +2,7 @@ package cache
 
 import (
 	"fmt"
-	"github.com/yidane/formula/opt"
+	"github.com/ghjan/formula/opt"
 	"strings"
 	"sync"
 )

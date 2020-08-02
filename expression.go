@@ -7,12 +7,12 @@ import (
 	"strings"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"github.com/yidane/formula/internal/cache"
-	"github.com/yidane/formula/internal/exp"
+	"github.com/ghjan/formula/internal/cache"
+	"github.com/ghjan/formula/internal/exp"
 	//register system functions
-	_ "github.com/yidane/formula/internal/fs"
-	"github.com/yidane/formula/internal/parser"
-	"github.com/yidane/formula/opt"
+	_ "github.com/ghjan/formula/internal/fs"
+	"github.com/ghjan/formula/internal/parser"
+	"github.com/ghjan/formula/opt"
 )
 
 //Expression for build user's input

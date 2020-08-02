@@ -1,7 +1,7 @@
 package fs
 
 import (
-	"github.com/yidane/formula/opt"
+	"github.com/ghjan/formula/opt"
 	"math"
 	"reflect"
 )

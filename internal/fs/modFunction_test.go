@@ -2,10 +2,10 @@ package fs
 
 import (
 	"fmt"
-	"github.com/yidane/formula/internal/exp"
+	"github.com/ghjan/formula/internal/exp"
 	"testing"
 
-	"github.com/yidane/formula/opt"
+	"github.com/ghjan/formula/opt"
 )
 
 func TestModFunction_Evaluate(t *testing.T) {
