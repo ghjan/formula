@@ -11,6 +11,20 @@ type BinaryExpression struct {
 	RightExpression *opt.LogicalExpression
 }
 
+func (expression *BinaryExpression) Parameters() []string {
+	p1 := (*expression.LeftExpression).Parameters()
+	p2 := (*expression.RightExpression).Parameters()
+	if p1 != nil {
+		if p2!=nil{
+			p1 = append(p1, p2...)
+		}
+		return p1
+	} else {
+		return p2
+	}
+
+}
+
 func NewBinaryExpression(name string, leftExpression, rightExpression *opt.LogicalExpression) *opt.LogicalExpression {
 	var result opt.LogicalExpression = &BinaryExpression{
 		Name:            name,

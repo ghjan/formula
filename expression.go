@@ -86,14 +86,32 @@ func (expression *Expression) ResetParameters() {
 	expression.context.Parameters = make(map[string]interface{})
 }
 
+//GetParameters get all parameter
+func (expression *Expression) GetParameters() []string{
+	if	pe,err :=expression.GetParsedExpression();err==nil && pe!=nil{
+		return (*pe).Parameters()
+	}
+	return nil
+
+}
+
+func (expression *Expression) GetParsedExpression() (*opt.LogicalExpression, error) {
+	var err error
+	if expression.parsedExpression == nil {
+		err = expression.compile()
+	}
+	return expression.parsedExpression, err
+}
+
 //Evaluate return result of expression
 func (expression *Expression) Evaluate() (*opt.Argument, error) {
-	err := expression.compile()
+	//err := expression.compile()
+
+	parsedExpression, err := expression.GetParsedExpression()
 	if err != nil {
 		return nil, err
 	}
-
-	result, err := (*expression.parsedExpression).Evaluate(expression.context)
+	result, err := (*parsedExpression).Evaluate(expression.context)
 	if err != nil {
 		return nil, err
 	}

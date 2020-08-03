@@ -15,6 +15,10 @@ type NotUnaryExpression struct {
 	UnaryExpression
 }
 
+func (expression *NotUnaryExpression) Parameters() []string {
+	return (*expression.Expression).Parameters()
+}
+
 func NewNotUnaryExpression(name string, expression *opt.LogicalExpression) *opt.LogicalExpression {
 	var result opt.LogicalExpression = &NotUnaryExpression{
 		UnaryExpression{
@@ -45,6 +49,10 @@ func (expression *NotUnaryExpression) Evaluate(context *opt.FormulaContext) (*op
 
 type BitwiseNotUnaryExpression struct {
 	UnaryExpression
+}
+
+func (expression *BitwiseNotUnaryExpression) Parameters() []string {
+	return (*expression.Expression).Parameters()
 }
 
 func NewBitwiseNotUnaryExpression(name string, expression *opt.LogicalExpression) *opt.LogicalExpression {
@@ -92,6 +100,10 @@ func (expression *BitwiseNotUnaryExpression) Evaluate(context *opt.FormulaContex
 
 type NegateUnaryExpression struct {
 	UnaryExpression
+}
+
+func (expression *NegateUnaryExpression) Parameters() []string {
+	return (*expression.Expression).Parameters()
 }
 
 func NewNegateUnaryExpression(name string, expression *opt.LogicalExpression) *opt.LogicalExpression {

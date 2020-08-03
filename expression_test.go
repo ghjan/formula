@@ -2,6 +2,7 @@ package formula
 
 import (
 	"fmt"
+	"github.com/ghjan/formula/utils"
 	"go/importer"
 	"math"
 	"testing"
@@ -123,32 +124,56 @@ func TestFunctionExpression(t *testing.T) {
 	}
 }
 
+type MyTestCase struct {
+	I int
+	J int
+	K int
+}
+
+var testCases = []MyTestCase{
+	{1, 1, 1},
+	{1, 2, 2},
+	{2, 3, 3},
+	{3, 4, 4},
+	{4, 5, 5},
+}
+
 func TestExpressionWithParameter(t *testing.T) {
-	const expressionString = "[i]+[j]"
-	testCases := []struct {
-		i int
-		j int
-	}{
-		{1, 1},
-		{1, 2},
-		{2, 3},
-		{3, 4},
-		{4, 5},
+	const expressionString = "[I]+[J]"
+	results := express_tt(expressionString, t, testCases)
+	for index, tt := range testCases {
+		result := results[index]
+		if result != int64(tt.I+tt.J) {
+			t.Fatal()
+		}
 	}
+}
 
+func TestExpressionWithParameter2(t *testing.T) {
+	const expressionString = "[I]+[J]*[K]"
+
+	results := express_tt(expressionString, t, testCases)
+	for index, tt := range testCases {
+		result := results[index]
+		if result != int64(tt.I+tt.J*tt.K) {
+			t.Fatal()
+		}
+	}
+}
+
+func express_tt(expressionString string, t *testing.T, testCases []MyTestCase) (results []int64) {
 	expression := NewExpression(expressionString)
-
+	params := expression.GetParameters()
+	t.Logf("expression.GetParameters():%#v\n", params)
 	for _, tt := range testCases {
 		expression.ResetParameters()
-		err := expression.AddParameter("i", tt.i)
-		if err != nil {
-			t.Fatal(err)
+		m := utils.StructToMapViaReflect(&tt)
+		for _, param := range params {
+			err := expression.AddParameter(param, m[param])
+			if err != nil {
+				t.Fatal(err)
+			}
 		}
-		err = expression.AddParameter("j", tt.j)
-		if err != nil {
-			t.Fatal(err)
-		}
-
 		result, err := expression.Evaluate()
 		if err != nil {
 			t.Fatal(err)
@@ -158,11 +183,9 @@ func TestExpressionWithParameter(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-
-		if v != int64(tt.i+tt.j) {
-			t.Fatal()
-		}
+		results = append(results, v)
 	}
+	return
 }
 
 func BenchmarkOnePlusOne(b *testing.B) {

@@ -8,6 +8,10 @@ import (
 type EmptyExpression struct {
 }
 
+func (expression *EmptyExpression) Parameters() []string {
+	return nil
+}
+
 func NewEmptyExpression() *opt.LogicalExpression {
 	var result opt.LogicalExpression = &EmptyExpression{}
 	return &result

@@ -12,6 +12,10 @@ type StringValueExpression struct {
 	Value string
 }
 
+func (expression *StringValueExpression) Parameters() ([]string) {
+	return nil
+}
+
 func NewStringValueExpression(value string) *opt.LogicalExpression {
 	var result opt.LogicalExpression = &StringValueExpression{
 		Value: value,
@@ -30,6 +34,10 @@ func (*StringValueExpression) ToString() string {
 
 type IntegerValueExpression struct {
 	Value int64
+}
+
+func (expression *IntegerValueExpression) Parameters() ([]string) {
+	return nil
 }
 
 func NewIntegerValueExpression(value string) *opt.LogicalExpression {
@@ -53,6 +61,10 @@ type FloatExpression struct {
 	Value float64
 }
 
+func (expression *FloatExpression) Parameters() ([]string) {
+	return nil
+}
+
 func NewFloatExpression(value string) *opt.LogicalExpression {
 	v, err := strconv.ParseFloat(value, 10)
 	if err != nil {
@@ -73,6 +85,10 @@ func (expression *FloatExpression) Evaluate(context *opt.FormulaContext) (*opt.A
 type PiExpression struct {
 }
 
+func (expression *PiExpression) Parameters() ([]string) {
+	return nil
+}
+
 func (*PiExpression) Evaluate(context *opt.FormulaContext) (*opt.Argument, error) {
 	return opt.NewArgumentWithType(math.Pi, reflect.Float64), nil
 }
@@ -88,6 +104,10 @@ type DateTimeExpression struct {
 	Value time.Time
 }
 
+func (expression *DateTimeExpression) Parameters() []string {
+	return nil
+}
+
 func NewDateTimeExpression(value string) *opt.LogicalExpression {
 	var result opt.LogicalExpression = &DateTimeExpression{}
 	return &result
@@ -99,6 +119,10 @@ func (expression *DateTimeExpression) Evaluate(context *opt.FormulaContext) (*op
 
 type BooleanValueExpression struct {
 	Value bool
+}
+
+func (expression *BooleanValueExpression) Parameters() ([]string) {
+	return nil
 }
 
 func NewBooleanValueExpression(value bool) *opt.LogicalExpression {

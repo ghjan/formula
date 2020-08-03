@@ -12,6 +12,31 @@ type TernaryExpression struct {
 	Right  *opt.LogicalExpression
 }
 
+func (expression *TernaryExpression) Parameters() []string {
+	p1 := (*expression.Left).Parameters()
+	p2 := (*expression.Middle).Parameters()
+	p3 := (*expression.Right).Parameters()
+	if p1 != nil {
+		if p2 != nil {
+			p1 = append(p1, p2...)
+		}
+		if p3 != nil {
+			p1 = append(p1, p3...)
+		}
+		return p1
+	} else {
+		if p2 != nil {
+			if p3 != nil {
+				p2 = append(p2, p3...)
+			}
+			return p2
+		} else {
+			return p3
+		}
+	}
+
+}
+
 func NewTernaryExpression(left, mid, right *opt.LogicalExpression) *opt.LogicalExpression {
 	var result opt.LogicalExpression = &TernaryExpression{
 		Left:   left,

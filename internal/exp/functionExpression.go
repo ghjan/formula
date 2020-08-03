@@ -10,6 +10,16 @@ type FunctionExpression struct {
 	Arguments  []*opt.LogicalExpression
 }
 
+func (expression *FunctionExpression) Parameters() []string {
+	var results []string
+	for _, arg := range expression.Arguments {
+		if pa :=(*arg).Parameters(); pa != nil {
+			results = append(results, pa...)
+		}
+	}
+	return results
+}
+
 func NewFunctionExpression(id *opt.LogicalExpression, args []*opt.LogicalExpression) *opt.LogicalExpression {
 	var result opt.LogicalExpression = &FunctionExpression{
 		Identifier: id,

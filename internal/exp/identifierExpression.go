@@ -10,6 +10,10 @@ type IdentifierExpression struct {
 	Name string
 }
 
+func (expression *IdentifierExpression) Parameters() []string {
+	return nil
+}
+
 func (expression *IdentifierExpression) Evaluate(context *opt.FormulaContext) (*opt.Argument, error) {
 	return opt.NewArgumentWithType(expression.Name, reflect.String), nil
 }
@@ -24,6 +28,10 @@ func NewIdentifierExpression(name string) *opt.LogicalExpression {
 
 type VarIdentifierExpression struct {
 	Name string
+}
+
+func (expression *VarIdentifierExpression) Parameters() []string {
+	return []string{expression.Name,}
 }
 
 //NewVarIdentifierExpression create new custom parameter which output like '[Parameter]'
