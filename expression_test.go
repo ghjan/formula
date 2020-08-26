@@ -140,7 +140,7 @@ var testCases = []MyTestCase{
 
 func TestExpressionWithParameter(t *testing.T) {
 	const expressionString = "[I]+[J]"
-	results := express_tt(expressionString, t, testCases)
+	results := expressTt(expressionString, t, testCases)
 	for index, tt := range testCases {
 		result := results[index]
 		if result != int64(tt.I+tt.J) {
@@ -152,7 +152,7 @@ func TestExpressionWithParameter(t *testing.T) {
 func TestExpressionWithParameter2(t *testing.T) {
 	const expressionString = "[I]+[J]*[K]"
 
-	results := express_tt(expressionString, t, testCases)
+	results := expressTt(expressionString, t, testCases)
 	for index, tt := range testCases {
 		result := results[index]
 		if result != int64(tt.I+tt.J*tt.K) {
@@ -161,7 +161,7 @@ func TestExpressionWithParameter2(t *testing.T) {
 	}
 }
 
-func express_tt(expressionString string, t *testing.T, testCases []MyTestCase) (results []int64) {
+func expressTt(expressionString string, t *testing.T, testCases []MyTestCase) (results []int64) {
 	expression := NewExpression(expressionString)
 	params := expression.GetParameters()
 	t.Logf("expression.GetParameters():%#v\n", params)
@@ -285,7 +285,9 @@ func TestForREADME(t *testing.T) {
 		"acos(sqrt(3)/2)",
 		"asin(1/2)",
 		"atan(1)",
+		"ceil(34)",
 		"ceil(3.4)",
+		"ceil(3.43)",
 		"concat(1,23,hello)",
 		"cos(π/3)",
 		"3/4",
@@ -305,7 +307,16 @@ func TestForREADME(t *testing.T) {
 		"3*3.4",
 		"5+10",
 		"pow(10,2)",
-		"round(100.11)",
+		"round(123.113)",
+		"round(123.113,2)",
+		"round(123.113,-1)",
+		"round(123.113,-2)",
+		"round(123.113,3)",
+		"roundup(123.113)",
+		"roundup(123.113,2)",
+		"roundup(123.113,3)",
+		"roundup(123.113,-1)",
+		"roundup(123.113,-2)",
 		"sign(100)",
 		"sin(π/6)",
 		"3-6",

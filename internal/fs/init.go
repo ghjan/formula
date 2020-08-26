@@ -33,6 +33,7 @@ func init() {
 		NewPlusFunction(),
 		NewPowerFunction(),
 		NewRoundFunction(),
+		NewRoundUpFunction(),
 		NewShiftLeftFunction(),
 		NewShiftRightFunction(),
 		NewSignFunction(),

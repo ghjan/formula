@@ -7,14 +7,14 @@ import (
 	"strings"
 )
 
-type RoundFunction struct {
+type RoundUpFunction struct {
 }
 
-func (*RoundFunction) Name() string {
-	return "round"
+func (*RoundUpFunction) Name() string {
+	return "roundup"
 }
 
-func (f *RoundFunction) Evaluate(context *opt.FormulaContext, args ...*opt.LogicalExpression) (*opt.Argument, error) {
+func (f *RoundUpFunction) Evaluate(context *opt.FormulaContext, args ...*opt.LogicalExpression) (*opt.Argument, error) {
 	err := opt.MatchTwoArgument(f.Name(), args...)
 	if err != nil && strings.Contains(err.Error(), "required only two arguments") {
 		err = opt.MatchOneArgument(f.Name(), args...)
@@ -46,12 +46,12 @@ func (f *RoundFunction) Evaluate(context *opt.FormulaContext, args ...*opt.Logic
 	v := v0
 	if math.Abs(v1) > 0.01 && math.Abs(v1) < 10 {
 		v = v0 * math.Pow(10, v1)
-		return opt.NewArgumentWithType(math.Round(v)/math.Pow(10, v1), reflect.Float64), nil
+		return opt.NewArgumentWithType(math.Ceil(v)/math.Pow(10, v1), reflect.Float64), nil
 	} else {
-		return opt.NewArgumentWithType(math.Round(v), reflect.Float64), nil
+		return opt.NewArgumentWithType(math.Ceil(v), reflect.Float64), nil
 	}
 }
 
-func NewRoundFunction() *RoundFunction {
-	return &RoundFunction{}
+func NewRoundUpFunction() *RoundUpFunction {
+	return &RoundUpFunction{}
 }
