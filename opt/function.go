@@ -32,3 +32,11 @@ func MatchTwoArgument(name string, args ...*LogicalExpression) error {
 
 	return nil
 }
+
+func MatchTwelveArgument(name string, args ...*LogicalExpression) error {
+	if len(args) != 12 {
+		return fmt.Errorf("function %s required only 12 arguments", name)
+	}
+
+	return nil
+}
