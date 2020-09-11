@@ -2,7 +2,7 @@ package fs
 
 import (
 	"fmt"
-	"github.com/ghjan/formula/internal/exp"
+	"github.com/ghjan/formula/pkg/exp"
 	"reflect"
 	"testing"
 

@@ -5,7 +5,7 @@ options{language=go;}
 @header {
 import (
     "github.com/ghjan/formula/opt"
-    "github.com/ghjan/formula/internal/exp"
+    "github.com/ghjan/formula/pkg/exp"
 )
 }
 

@@ -1,7 +1,7 @@
 package fs
 
 import (
-	"github.com/ghjan/formula/internal/exp"
+	"github.com/ghjan/formula/pkg/exp"
 	"testing"
 
 	"github.com/ghjan/formula/opt"

@@ -8,7 +8,7 @@ import (
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/ghjan/formula/internal/cache"
-	"github.com/ghjan/formula/internal/exp"
+	"github.com/ghjan/formula/pkg/exp"
 	//register system functions
 	_ "github.com/ghjan/formula/internal/fs"
 	"github.com/ghjan/formula/internal/parser"

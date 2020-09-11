@@ -11,7 +11,7 @@ import (
 )
 
 import (
-	"github.com/ghjan/formula/internal/exp"
+	"github.com/ghjan/formula/pkg/exp"
 	"github.com/ghjan/formula/opt"
 )
 
