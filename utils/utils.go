@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"math"
 	"reflect"
 )
 
@@ -23,4 +24,13 @@ func StructToMapViaReflect(object interface{}) (m map[string]interface{}) {
 		m[relType.Field(i).Name] = elem.Field(i).Interface()
 	}
 	return m
+}
+
+func RoundUp(v0 float64, v1 int) float64 {
+	v := v0
+	if math.Abs(float64(v1)) < 20 {
+		v = math.Ceil(v0*math.Pow(10, float64(v1))) / math.Pow(10, float64(v1))
+	}
+	return v
+
 }

@@ -2,7 +2,7 @@ package fs
 
 import (
 	"github.com/ghjan/formula/opt"
-	"math"
+	"github.com/ghjan/formula/utils"
 	"reflect"
 	"strings"
 )
@@ -26,13 +26,13 @@ func (f *RoundUpFunction) Evaluate(context *opt.FormulaContext, args ...*opt.Log
 	if err != nil {
 		return nil, err
 	}
-	v1 := 0.0
+	v1 := 0
 	if len(args) > 1 {
 		arg1, err := (*args[1]).Evaluate(context)
 		if err != nil {
 			return nil, err
 		}
-		v1, err = arg1.Float64()
+		v1, err = arg1.Int()
 		if err != nil {
 			return nil, err
 		}
@@ -43,13 +43,8 @@ func (f *RoundUpFunction) Evaluate(context *opt.FormulaContext, args ...*opt.Log
 		return nil, err
 	}
 
-	v := v0
-	if math.Abs(v1) > 0.01 && math.Abs(v1) < 10 {
-		v = v0 * math.Pow(10, v1)
-		return opt.NewArgumentWithType(math.Ceil(v)/math.Pow(10, v1), reflect.Float64), nil
-	} else {
-		return opt.NewArgumentWithType(math.Ceil(v), reflect.Float64), nil
-	}
+	v := utils.RoundUp(v0, v1)
+	return opt.NewArgumentWithType(v, reflect.Float64), nil
 }
 
 func NewRoundUpFunction() *RoundUpFunction {
