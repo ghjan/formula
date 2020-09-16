@@ -16,7 +16,7 @@ func (*RoundUpFunction) Name() string {
 
 func (f *RoundUpFunction) Evaluate(context *opt.FormulaContext, args ...*opt.LogicalExpression) (*opt.Argument, error) {
 	err := opt.MatchTwoArgument(f.Name(), args...)
-	if err != nil && strings.Contains(err.Error(), "required only two arguments") {
+	if err != nil && strings.Contains(err.Error(), "required only ") {
 		err = opt.MatchOneArgument(f.Name(), args...)
 	} else if err != nil {
 		return nil, err

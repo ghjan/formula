@@ -17,26 +17,33 @@ func MatchArgument(name string, args ...*LogicalExpression) error {
 	return nil
 }
 
-func MatchOneArgument(name string, args ...*LogicalExpression) error {
-	if len(args) != 1 {
-		return fmt.Errorf("function %s required only one argument", name)
+func MatchSeveralArgument(argsCount int, name string, args ...*LogicalExpression) error {
+	if len(args) != argsCount {
+		return fmt.Errorf("function %s required only %d argument", name, argsCount)
 	}
 
 	return nil
+}
+
+func AtLeastSeveralArgument(argsCount int, name string, args ...*LogicalExpression) error {
+	if len(args) < argsCount {
+		return fmt.Errorf("function %s required at least 1 arguments", name)
+	}
+	return nil
+}
+
+func MatchOneArgument(name string, args ...*LogicalExpression) error {
+	return MatchSeveralArgument(1, name, args...)
 }
 
 func MatchTwoArgument(name string, args ...*LogicalExpression) error {
-	if len(args) != 2 {
-		return fmt.Errorf("function %s required only two arguments", name)
-	}
-
-	return nil
+	return MatchSeveralArgument(2, name, args...)
 }
 
 func MatchTwelveArgument(name string, args ...*LogicalExpression) error {
-	if len(args) != 12 {
-		return fmt.Errorf("function %s required only 12 arguments", name)
-	}
+	return MatchSeveralArgument(12, name, args...)
+}
 
-	return nil
+func AtLeastOneArgument(name string, args ...*LogicalExpression) error {
+	return AtLeastSeveralArgument(1, name, args...)
 }

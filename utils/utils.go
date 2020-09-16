@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"math"
 	"reflect"
+	"strconv"
 )
 
 func StructToMapViaJson(object interface{}) (m map[string]interface{}) {
@@ -33,4 +34,9 @@ func RoundUp(v0 float64, v1 int) float64 {
 	}
 	return v
 
+}
+
+func IsNum(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
 }

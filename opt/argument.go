@@ -5,6 +5,7 @@ import (
 	"math"
 	"reflect"
 	"strconv"
+	"strings"
 )
 
 type ArgumentFunc func() (interface{}, error)
@@ -170,6 +171,53 @@ func (arg *Argument) String() string {
 	default:
 		return fmt.Sprint(arg.Value)
 	}
+}
+
+func (arg *Argument) Bool() bool {
+	switch arg.Type {
+	case reflect.Bool:
+		return arg.Value.(bool)
+	case reflect.Int:
+		return arg.Value.(int) != 0
+	case reflect.Int8:
+		return int(arg.Value.(int8)) != 0
+	case reflect.Int16:
+		return int(arg.Value.(int16)) != 0
+	case reflect.Int32:
+		return int(arg.Value.(int32)) != 0
+	case reflect.Int64:
+		return int(arg.Value.(int64)) != 0
+	case reflect.Uint:
+		return int(arg.Value.(uint)) != 0
+	case reflect.Uint8:
+		return int(arg.Value.(uint8)) != 0
+	case reflect.Uint16:
+		return int(arg.Value.(uint16)) != 0
+	case reflect.Uint32:
+		return int(arg.Value.(uint32)) != 0
+	case reflect.Uint64:
+		return int(arg.Value.(uint64)) != 0
+	case reflect.Float32:
+		return math.Abs(float64(arg.Value.(float32))) <= 0.000001
+	case reflect.Float64:
+		return math.Abs(arg.Value.(float64)) <= 0.000001
+	case reflect.String:
+		value := strings.TrimSpace(strings.ToLower(arg.Value.(string)))
+		return value != "none" && value != "null" && value != "0"
+	default:
+		if arg.IsNan() {
+			return false
+		}
+		return true
+	}
+}
+
+func (arg *Argument) IsBool() bool {
+	return arg.Type == reflect.Bool
+}
+
+func (arg *Argument) IsString() bool {
+	return arg.Type == reflect.String
 }
 
 func (arg *Argument) IsNumber() bool {

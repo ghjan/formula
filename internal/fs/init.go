@@ -22,6 +22,7 @@ func init() {
 		NewIIFFunction(),
 		NewInFunction(),
 		NewLessFunction(),
+		NewEqualFunction(),
 		NewLogFunction(),
 		NewLog2Function(),
 		NewLog10Function(),
