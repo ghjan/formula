@@ -26,13 +26,13 @@ func (f *RoundUpFunction) Evaluate(context *opt.FormulaContext, args ...*opt.Log
 	if err != nil {
 		return nil, err
 	}
-	v1 := 0
+	v1 := 0.0
 	if len(args) > 1 {
 		arg1, err := (*args[1]).Evaluate(context)
 		if err != nil {
 			return nil, err
 		}
-		v1, err = arg1.Int()
+		v1, err = arg1.Float64()
 		if err != nil {
 			return nil, err
 		}
@@ -43,7 +43,7 @@ func (f *RoundUpFunction) Evaluate(context *opt.FormulaContext, args ...*opt.Log
 		return nil, err
 	}
 
-	v := utils.RoundUp(v0, v1)
+	v := utils.RoundUp(v0, int(v1))
 	return opt.NewArgumentWithType(v, reflect.Float64), nil
 }
 

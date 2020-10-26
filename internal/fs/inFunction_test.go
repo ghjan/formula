@@ -19,6 +19,31 @@ func TestInFunction_Evaluate(t *testing.T) {
 			exp.NewFloatExpression("1.1"),
 			exp.NewStringValueExpression("1"),
 		}, want: true},
+		{args: []*opt.LogicalExpression{
+			exp.NewFloatExpression("1.1"),
+			exp.NewStringValueExpression("1.1"),
+			exp.NewStringValueExpression("1"),
+		}, want: false},
+		{args: []*opt.LogicalExpression{
+			exp.NewStringValueExpression("1.1"),
+			exp.NewFloatExpression("1.1"),
+			exp.NewStringValueExpression("1"),
+		}, want: false},
+		{args: []*opt.LogicalExpression{
+			exp.NewStringValueExpression("楼梯房"),
+			exp.NewStringValueExpression("电梯房"),
+			exp.NewStringValueExpression("楼梯房"),
+		}, want: true},
+		{args: []*opt.LogicalExpression{
+			exp.NewStringValueExpression("电梯房"),
+			exp.NewStringValueExpression("电梯房"),
+			exp.NewStringValueExpression("楼梯房"),
+		}, want: true},
+		{args: []*opt.LogicalExpression{
+			exp.NewStringValueExpression(""),
+			exp.NewStringValueExpression("电梯房"),
+			exp.NewStringValueExpression("楼梯房"),
+		}, want: false},
 	}
 	i := NewInFunction()
 	for _, tt := range tests {

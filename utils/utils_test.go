@@ -1,7 +1,9 @@
 package utils
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
+	"strconv"
 	"testing"
 )
 
@@ -74,3 +76,32 @@ func TestStructToMapViaReflect(t *testing.T) {
 	a.Equal(person.Address, p["Address"])
 	a.Equal(person.Email, p["Email"])
 }
+
+var testRoundUpArgs = []struct {
+	args []string
+	want string
+}{
+	{[]string{"123.4567", "3"}, "123.457"},
+	{[]string{"123.4567", "2"}, "123.46"},
+	{[]string{"123.4567", "0"}, "124"},
+	{[]string{"123.4567", "-1"}, "130"},
+	{[]string{"123.4567", "-2"}, "200"},
+	{[]string{"1123.4567", "-3"}, "2000"},
+}
+
+func TestRoundUp(t *testing.T) {
+	for _, tt := range testRoundUpArgs {
+		t.Run(fmt.Sprint(tt.args), func(t *testing.T) {
+			v0, _ := strconv.ParseFloat(tt.args[0], 64)
+			v1 := 0
+			if len(tt.args) > 1 {
+				v1, _ = strconv.Atoi(tt.args[1])
+			}
+			result := RoundUp(v0, v1)
+			want, _ := strconv.ParseFloat(tt.want, 64)
+			assert.Equal(t, result, want)
+		})
+	}
+}
+
+

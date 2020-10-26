@@ -302,6 +302,8 @@ func TestForREADME(t *testing.T) {
 		"iif('true' == 'TRUE','等于true','不等于true')",
 		"iif('true' == '1','等于true','不等于true')",
 		"iif('true' == '0','等于true','不等于true')",
+		"iif(aand(in('电梯房','电梯房','楼梯房'),'框架'=='框架'),true,false)",
+		"iif(aand(in('电梯房','电梯房','楼梯房'),'砖混'=='框架'),true,false)",
 		"oor('true' == '0',3==2,2==2)",
 		"oor('true' == '0',3==2,1==2)",
 		"aand('true' == '0',3==2,2==2)",
