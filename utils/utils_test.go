@@ -104,4 +104,29 @@ func TestRoundUp(t *testing.T) {
 	}
 }
 
+var testRoundDownArgs = []struct {
+	args []string
+	want string
+}{
+	{[]string{"123.4567", "3"}, "123.456"},
+	{[]string{"123.4567", "2"}, "123.45"},
+	{[]string{"123.4567", "0"}, "123"},
+	{[]string{"123.4567", "-1"}, "120"},
+	{[]string{"123.4567", "-2"}, "100"},
+	{[]string{"1123.4567", "-3"}, "1000"},
+}
 
+func TestRoundDown(t *testing.T) {
+	for _, tt := range testRoundDownArgs {
+		t.Run(fmt.Sprint(tt.args), func(t *testing.T) {
+			v0, _ := strconv.ParseFloat(tt.args[0], 64)
+			v1 := 0
+			if len(tt.args) > 1 {
+				v1, _ = strconv.Atoi(tt.args[1])
+			}
+			result := RoundDown(v0, v1)
+			want, _ := strconv.ParseFloat(tt.want, 64)
+			assert.Equal(t, result, want)
+		})
+	}
+}

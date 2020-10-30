@@ -36,6 +36,15 @@ func RoundUp(v0 float64, v1 int) float64 {
 
 }
 
+func RoundDown(v0 float64, v1 int) float64 {
+	v := v0
+	if math.Abs(float64(v1)) < 20 {
+		v = math.Floor(v0*math.Pow(10, float64(v1))) / math.Pow(10, float64(v1))
+	}
+	return v
+
+}
+
 func IsNum(s string) bool {
 	_, err := strconv.ParseFloat(s, 64)
 	return err == nil

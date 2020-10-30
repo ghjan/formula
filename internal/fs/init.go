@@ -40,6 +40,7 @@ func init() {
 		NewPowerFunction(),
 		NewRoundFunction(),
 		NewRoundUpFunction(),
+		NewRoundDownFunction(),
 		NewShiftLeftFunction(),
 		NewShiftRightFunction(),
 		NewSignFunction(),
